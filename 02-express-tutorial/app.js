@@ -21,7 +21,7 @@ app.get('/contact', (req, res) => {
 });
 
 // Make sure we also return the css and js files requested by the index.html file
-app.use(express.static('./public'));
+app.use(express.static('./navbar-app'));
 
 app.all('*', (req, res) => {
     res.status(404).send('Resource not found');
