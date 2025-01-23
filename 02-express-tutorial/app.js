@@ -1,23 +1,28 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+const { logger, logging } = require('./logger');
+const authorize = require('./authorize');
 
-const logger = (req, res, next) => {
-    const method = req.method;
-    const url = req.url;
-    const time = new Date().getFullYear();
-    console.log(method, url, time);
-    next();
-}
+// Apply middleware
+// app.use(logger); 
+// app.use(logging); 
+// app.use(authorize);
+app.use(morgan('tiny'));
 
-app.get('/', logger, (req, res) => {
-    res.send('Hello World');
+// Routes
+app.get('/', (req, res) => {
+  res.send('Hello World');
 });
 
-// About page
-app.get('/about', logger, (req, res) => {
-    res.send('About page');
+app.get('/api', (req, res) => {
+  res.send('API page');
+});
+
+app.get('/about', (req, res) => {
+  res.send('About page');
 });
 
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+  console.log('Server is running on port http://localhost:3000');
 });
