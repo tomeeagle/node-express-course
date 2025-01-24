@@ -36,11 +36,5 @@ const products = [
       ]
     }
 ];
-const people = [
-    { id: 1, name: 'john' },
-    { id: 2, name: 'peter' },
-    { id: 3, name: 'susan' },
-    { id: 4, name: 'anna' },
-    { id: 5, name: 'emma' }
-];
+const people = [{"id":1,"name":"john"},{"id":2,"name":"pluto"},{"id":3,"name":"susan"},{"id":4,"name":"cundo"},{"id":5,"name":"emma"}];
 module.exports = { products, people };

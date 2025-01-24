@@ -1,0 +1,49 @@
+const fs = require('fs');
+
+const replaceArrayInFile = (filePath, arrayName, newArray) => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                const arrayDeclaration = `const ${arrayName} = `;
+                const arrayIndex = data.indexOf(arrayDeclaration);
+
+                if (arrayIndex === -1) {
+                    reject(
+                        new Error(`Array "${arrayName}" not found in file.`)
+                    );
+                }
+
+                const startIndex = arrayIndex + arrayDeclaration.length;
+                let endIndex = data.indexOf(';', startIndex);
+
+                if (endIndex === -1) {
+                    reject(
+                        new Error(
+                            `Could not find the end of the array declaration.`
+                        )
+                    );
+                }
+
+                const oldArrayString = data.substring(startIndex, endIndex);
+                const newContent = data.replace(
+                    oldArrayString,
+                    JSON.stringify(newArray)
+                );
+
+                fs.writeFile(filePath, newContent, 'utf8', (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            }
+        });
+    });
+}
+
+module.exports = {
+    replaceArrayInFile,
+};
