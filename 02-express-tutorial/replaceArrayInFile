@@ -36,14 +36,14 @@ const replaceArrayInFile = (filePath, arrayName, newArray) => {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve();
+                        resolve("Array replaced successfully.");
                     }
                 });
             }
         });
     });
-}
+};
 
 module.exports = {
-    replaceArrayInFile,
+    replaceArrayInFile
 };
